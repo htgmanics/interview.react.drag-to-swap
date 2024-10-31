@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Actions from "./actions";
+import PhotoGrid from "./PhotoGrid";
 
 const Wrapper = styled.div`
   width: 600px;
@@ -22,23 +23,7 @@ const Title = styled.div`
   line-height: 20px;
 `;
 
-const PageLayout = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  background: #2778a5;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 17px 0 42px;
-  justify-content: space-between;
-`;
 
-const PrintPhoto = styled.div`
-  width: calc(50% - 10px);
-
-  img {
-    max-width: 100%;
-  }
-`;
 
 export default function PrintPage({ data }) {
   return (
@@ -51,15 +36,7 @@ export default function PrintPage({ data }) {
                 <Title>{entry.title}</Title>
                 <Actions />
               </Header>
-              <PageLayout>
-                {entry.images.map((image) => {
-                  return (
-                    <PrintPhoto key={image}>
-                      <img src={image} alt="" />
-                    </PrintPhoto>
-                  );
-                })}
-              </PageLayout>
+              <PhotoGrid layoutId={`print-${i}`} data={entry} />
             </PrintWrapper>
           );
         })}
